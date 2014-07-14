@@ -121,6 +121,8 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           // Set the initial positioning.
           modalElement.css({display: 'block'}).addClass(options.placement);
 
+		  scope.$emit(options.prefixEvent + '.show', $modal);
+		  
           scope.$isShown = true;
           scope.$$phase || (scope.$root && scope.$root.$$phase) || scope.$digest();
           // Focus once the enter-animation has started

@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.3 - 2014-07-08
+ * @version v2.0.3 - 2014-07-14
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -118,6 +118,7 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions']).pr
           scope.$emit(options.prefixEvent + '.show.before', $modal);
           // Set the initial positioning.
           modalElement.css({ display: 'block' }).addClass(options.placement);
+          scope.$emit(options.prefixEvent + '.show', $modal);
           scope.$isShown = true;
           scope.$$phase || scope.$root && scope.$root.$$phase || scope.$digest();
           // Focus once the enter-animation has started

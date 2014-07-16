@@ -14,7 +14,10 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
       element: null,
       keyboard: false,
       html: false,
-      show: true
+      show: false,
+      id: null,
+      wrapperClass: 'Modal',
+      animationClass: 'fadeInScale'
     };
 
     this.$get = function($window, $rootScope, $compile, $q, $templateCache, $http, $timeout, $sce) {
@@ -98,6 +101,17 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           // Add modalElement
           var parent = options.container ? findElement(options.container) : null;
           parent.append(modalElement);
+		  
+		  if (options.container === 'body') {
+            var classList = options.wrapperClass;
+			
+			if (options.animationClass) {
+			  classList += ' ' + options.animationClass;
+			}
+			
+			modalElement.wrap('<div id="' + options.id + '" class="' + classList + '"></div>');
+			options.container = '#' + options.id;
+		  }
 
         };
 

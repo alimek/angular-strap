@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.3 - 2014-07-14
+ * @version v2.0.3 - 2014-07-16
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -1732,7 +1732,10 @@
         element: null,
         keyboard: false,
         html: false,
-        show: true
+        show: false,
+        id: null,
+        wrapperClass: 'Modal',
+        animationClass: 'fadeInScale'
       };
     this.$get = [
       '$window',
@@ -1819,6 +1822,14 @@
             // Add modalElement
             var parent = options.container ? findElement(options.container) : null;
             parent.append(modalElement);
+            if (options.container === 'body') {
+              var classList = options.wrapperClass;
+              if (options.animationClass) {
+                classList += ' ' + options.animationClass;
+              }
+              modalElement.wrap('<div id="' + options.id + '" class="' + classList + '"></div>');
+              options.container = '#' + options.id;
+            }
           };
           $modal.destroy = function () {
             // Remove element

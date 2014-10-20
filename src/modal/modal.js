@@ -99,20 +99,24 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           modalElement = $modal.$element = modalLinker(scope, function(clonedElement, scope) {});
 
           // Add modalElement
-          var parent = options.container ? findElement(options.container) : null;
-          parent.append(modalElement);
-		  
-		  if (options.container === 'body') {
-            var classList = options.wrapperClass;
-			
-			if (options.animationClass) {
-			  classList += ' ' + options.animationClass;
-			}
-			
-			modalElement.wrap('<div id="' + options.id + '" class="' + classList + '"></div>');
-			options.container = '#' + options.id;
-		  }
+          if (!angular.element('#' + options.id).length) {
+            var parent = options.container ? findElement(options.container) : null;
+            parent.append(modalElement);
 
+            if (options.container === 'body') {
+              var classList = options.wrapperClass;
+
+              if (options.animationClass) {
+                classList += ' ' + options.animationClass;
+              }
+
+              modalElement.wrap('<div id="' + options.id + '" class="' + classList + '"></div>');
+            }
+          }
+
+          if (options.id) {
+            options.container = '#' + options.id;
+          }
         };
 
         $modal.destroy = function() {

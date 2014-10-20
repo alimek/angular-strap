@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.3 - 2014-07-16
+ * @version v2.0.3 - 2014-10-20
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -105,14 +105,18 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions']).pr
           modalElement = $modal.$element = modalLinker(scope, function (clonedElement, scope) {
           });
           // Add modalElement
-          var parent = options.container ? findElement(options.container) : null;
-          parent.append(modalElement);
-          if (options.container === 'body') {
-            var classList = options.wrapperClass;
-            if (options.animationClass) {
-              classList += ' ' + options.animationClass;
+          if (!angular.element('#' + options.id).length) {
+            var parent = options.container ? findElement(options.container) : null;
+            parent.append(modalElement);
+            if (options.container === 'body') {
+              var classList = options.wrapperClass;
+              if (options.animationClass) {
+                classList += ' ' + options.animationClass;
+              }
+              modalElement.wrap('<div id="' + options.id + '" class="' + classList + '"></div>');
             }
-            modalElement.wrap('<div id="' + options.id + '" class="' + classList + '"></div>');
+          }
+          if (options.id) {
             options.container = '#' + options.id;
           }
         };

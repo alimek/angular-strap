@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.2.1 - 2015-03-10
+ * @version v2.2.1 - 2015-06-03
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -505,6 +505,21 @@ angular.module('mgcrea.ngStrap.datepicker', [
             },
             isDisabled: function(date) {
               var time = date.getTime();
+
+                var maxDate = new Date(options.maxDate),
+                    minDate = new Date(options.minDate);
+
+                minDate.setHours(0);
+                minDate.setMinutes(0);
+                minDate.setSeconds(0);
+                minDate.setMilliseconds(0);
+                maxDate.setHours(0);
+                maxDate.setMinutes(0);
+                maxDate.setSeconds(0);
+                maxDate.setMilliseconds(0);
+
+                options.minDate = minDate.getTime();
+                options.maxDate = maxDate.getTime();
 
               // Disabled because of min/max date.
               if (time < options.minDate || time > options.maxDate) return true;

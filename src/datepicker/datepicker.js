@@ -499,6 +499,21 @@ angular.module('mgcrea.ngStrap.datepicker', [
             isDisabled: function(date) {
               var time = date.getTime();
 
+                var maxDate = new Date(options.maxDate),
+                    minDate = new Date(options.minDate);
+
+                minDate.setHours(0);
+                minDate.setMinutes(0);
+                minDate.setSeconds(0);
+                minDate.setMilliseconds(0);
+                maxDate.setHours(0);
+                maxDate.setMinutes(0);
+                maxDate.setSeconds(0);
+                maxDate.setMilliseconds(0);
+
+                options.minDate = minDate.getTime();
+                options.maxDate = maxDate.getTime();
+
               // Disabled because of min/max date.
               if (time < options.minDate || time > options.maxDate) return true;
 

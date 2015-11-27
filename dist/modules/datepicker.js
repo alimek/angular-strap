@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.3 - 2014-10-20
+ * @version v2.0.3 - 2015-11-27
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -347,7 +347,7 @@ angular.module('mgcrea.ngStrap.datepicker', [
             controller.$setValidity('date', true);
             return;
           }
-          var parsedDate = dateParser.parse(viewValue, controller.$dateValue);
+          var parsedDate = dateParser.parse(viewValue, controller.$viewValue);
           if (!parsedDate || isNaN(parsedDate.getTime())) {
             controller.$setValidity('date', false);
             return;
@@ -489,6 +489,17 @@ angular.module('mgcrea.ngStrap.datepicker', [
               },
               isDisabled: function (date) {
                 var time = date.getTime();
+                var maxDate = new Date(options.maxDate), minDate = new Date(options.minDate);
+                minDate.setHours(0);
+                minDate.setMinutes(0);
+                minDate.setSeconds(0);
+                minDate.setMilliseconds(0);
+                maxDate.setHours(0);
+                maxDate.setMinutes(0);
+                maxDate.setSeconds(0);
+                maxDate.setMilliseconds(0);
+                options.minDate = minDate.getTime();
+                options.maxDate = maxDate.getTime();
                 // Disabled because of min/max date.
                 if (time < options.minDate || time > options.maxDate)
                   return true;

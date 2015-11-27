@@ -350,7 +350,7 @@ angular.module('mgcrea.ngStrap.datepicker', [
             // ngModelController can go ahead and run validators, like ngRequired
             return null;
           }
-          var parsedDate = dateParser.parse(viewValue, controller.$dateValue);
+          var parsedDate = dateParser.parse(viewValue, controller.$viewValue);
           if(!parsedDate || isNaN(parsedDate.getTime())) {
             controller.$setValidity('date', false);
             // return undefined, causes ngModelController to

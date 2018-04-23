@@ -318,7 +318,7 @@ angular.module('mgcrea.ngStrap.timepicker', ['mgcrea.ngStrap.helpers.dateParser'
         options = timepicker.$options;
 
         // Initialize parser
-        var dateParser = $dateParser({format: options.timeFormat, lang: options.lang});
+        var dateParser = $dateParser({format: 'HH:mm', lang: options.lang});
 
         // Observe attributes for changes
         angular.forEach(['minTime', 'maxTime'], function(key) {

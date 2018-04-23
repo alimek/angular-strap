@@ -3052,7 +3052,7 @@
           options = timepicker.$options;
           // Initialize parser
           var dateParser = $dateParser({
-              format: options.timeFormat,
+              format: 'HH:mm',
               lang: options.lang
             });
           // Observe attributes for changes

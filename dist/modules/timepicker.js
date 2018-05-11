@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.3 - 2015-11-27
+ * @version v2.0.3 - 2018-05-11
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -371,7 +371,7 @@ angular.module('mgcrea.ngStrap.timepicker', [
         options = timepicker.$options;
         // Initialize parser
         var dateParser = $dateParser({
-            format: options.timeFormat,
+            format: 'HH:mm',
             lang: options.lang
           });
         // Observe attributes for changes

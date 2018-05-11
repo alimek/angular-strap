@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.3 - 2015-11-27
+ * @version v2.0.3 - 2018-05-11
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -210,7 +210,7 @@ angular.module('mgcrea.ngStrap.datepicker', [
         $datepicker.show = function () {
           _show();
           setTimeout(function () {
-            $datepicker.$element.on(isTouch ? 'touchstart' : 'mousedown', $datepicker.$onMouseDown);
+            $datepicker.$element.on(isTouch && 'touchstart' in element ? 'touchstart' : 'mousedown', $datepicker.$onMouseDown);
             if (options.keyboard) {
               element.on('keydown', $datepicker.$onKeyDown);
             }
@@ -218,7 +218,7 @@ angular.module('mgcrea.ngStrap.datepicker', [
         };
         var _hide = $datepicker.hide;
         $datepicker.hide = function (blur) {
-          $datepicker.$element.off(isTouch ? 'touchstart' : 'mousedown', $datepicker.$onMouseDown);
+          $datepicker.$element.off(isTouch && 'touchstart' in element ? 'touchstart' : 'mousedown', $datepicker.$onMouseDown);
           if (options.keyboard) {
             element.off('keydown', $datepicker.$onKeyDown);
           }

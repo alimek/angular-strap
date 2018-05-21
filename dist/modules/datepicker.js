@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.3 - 2018-05-11
+ * @version v2.0.3 - 2018-05-21
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -46,8 +46,8 @@ angular.module('mgcrea.ngStrap.datepicker', [
     '$tooltip',
     function ($window, $document, $rootScope, $sce, $locale, dateFilter, datepickerViews, $tooltip) {
       var bodyEl = angular.element($window.document.body);
-      var isTouch = 'createTouch' in $window.document;
       var isNative = /(ip(a|o)d|iphone|android)/gi.test($window.navigator.userAgent);
+      var isTouch = 'createTouch' in $window.document && isNative;
       if (!defaults.lang)
         defaults.lang = $locale.id;
       function DatepickerFactory(element, controller, config) {

@@ -304,14 +304,14 @@ angular.module('mgcrea.ngStrap.datepicker', ['mgcrea.ngStrap.helpers.dateParser'
         }
 
         if (angular.isDefined(attr.disabledDates)) {
-          scope.$watch(attr.disabledDates, function(disabledRanges, previousValue) {
-            disabledRanges = normalizeDateRanges(disabledRanges);
-            previousValue = normalizeDateRanges(previousValue);
+              scope.$watch(attr.disabledDates, function (disabledRanges, previousValue) {
+                  disabledRanges = normalizeDateRanges(disabledRanges);
+                  normalizeDateRanges(previousValue);
 
-            if (disabledRanges !== previousValue) {
-              datepicker.updateDisabledDates(disabledRanges);
-            }
-          });
+                  if (disabledRanges) {
+                      datepicker.updateDisabledDates(disabledRanges);
+                  }
+              });
         }
 
         var dateParser = $dateParser({format: options.dateFormat, lang: options.lang, strict: options.strictFormat});
@@ -479,17 +479,13 @@ angular.module('mgcrea.ngStrap.datepicker', ['mgcrea.ngStrap.helpers.dateParser'
               if (time < options.minDate || time > options.maxDate) return true;
 
               // Disabled because of disabled date range.
-              if (options.disabledDateRanges) {
-                for (var i = 0; i < options.disabledDateRanges.length; i++) {
-                  if (time >= options.disabledDateRanges[i].start) {
-                    if (time <= options.disabledDateRanges[i].end) return true;
-
-                    // The disabledDateRanges is expected to be sorted, so if time >= start,
-                    // we know it's not disabled.
-                    return false;
+               if (options.disabledDateRanges) {
+                  for (var i = 0; i < options.disabledDateRanges.length; i++) {
+                    if (time >= options.disabledDateRanges[i].start && time <= options.disabledDateRanges[i].end) {
+                      return true;
+                    }
                   }
                 }
-              }
 
               return false;
             },

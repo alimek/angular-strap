@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.3 - 2018-05-21
+ * @version v2.0.3 - 2018-11-08
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -331,8 +331,8 @@ angular.module('mgcrea.ngStrap.datepicker', [
         if (angular.isDefined(attr.disabledDates)) {
           scope.$watch(attr.disabledDates, function (disabledRanges, previousValue) {
             disabledRanges = normalizeDateRanges(disabledRanges);
-            previousValue = normalizeDateRanges(previousValue);
-            if (disabledRanges !== previousValue) {
+            normalizeDateRanges(previousValue);
+            if (disabledRanges) {
               datepicker.updateDisabledDates(disabledRanges);
             }
           });
@@ -509,12 +509,8 @@ angular.module('mgcrea.ngStrap.datepicker', [
                 // Disabled because of disabled date range.
                 if (options.disabledDateRanges) {
                   for (var i = 0; i < options.disabledDateRanges.length; i++) {
-                    if (time >= options.disabledDateRanges[i].start) {
-                      if (time <= options.disabledDateRanges[i].end)
-                        return true;
-                      // The disabledDateRanges is expected to be sorted, so if time >= start,
-                      // we know it's not disabled.
-                      return false;
+                    if (time >= options.disabledDateRanges[i].start && time <= options.disabledDateRanges[i].end) {
+                      return true;
                     }
                   }
                 }
